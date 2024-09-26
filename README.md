@@ -3,3 +3,4 @@
 ### Base de datos relacionada a una farmacia la cual mediante clientes realizan compras de sus productos. (Medicamentos)
 
 # DER
+![Diagrama entidad relación](DIAGRAMA.png)
