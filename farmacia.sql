@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-09-2024 a las 00:27:55
+-- Tiempo de generación: 26-09-2024 a las 11:42:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -29,19 +29,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `clientes` (
   `cliente_id` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `dni` int(8) NOT NULL,
-  `apellido` varchar(45) NOT NULL,
-  `obra social` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+  `nombre` varchar(255) NOT NULL,
+  `dni` int(11) NOT NULL,
+  `apellido` varchar(255) NOT NULL,
+  `obra_social` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`cliente_id`, `nombre`, `dni`, `apellido`, `obra social`) VALUES
-(1, 'José', 3554568, 'Gutierrez', 'OSDE'),
-(2, 'María', 43560987, 'Ferreira', 'IOMA');
+INSERT INTO `clientes` (`cliente_id`, `nombre`, `dni`, `apellido`, `obra_social`) VALUES
+(1, 'José', 34569231, 'Gutierrez', 'OSDE'),
+(2, 'María', 45678231, 'Lopez', 'IOMA');
 
 -- --------------------------------------------------------
 
@@ -51,41 +51,21 @@ INSERT INTO `clientes` (`cliente_id`, `nombre`, `dni`, `apellido`, `obra social`
 
 CREATE TABLE `compras` (
   `compra_id` int(11) NOT NULL,
-  `descripcion` varchar(100) NOT NULL,
   `monto` decimal(10,2) NOT NULL,
   `fecha_compra` date NOT NULL,
-  `cliente_id` int(11) NOT NULL,
-  `producto_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+  `nombre_producto` varchar(100) NOT NULL,
+  `nombre_droga` varchar(100) NOT NULL,
+  `precio` int(11) NOT NULL,
+  `cliente_foranea_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `compras`
 --
 
-INSERT INTO `compras` (`compra_id`, `descripcion`, `monto`, `fecha_compra`, `cliente_id`, `producto_id`) VALUES
-(1, 'Tafirol', 5.00, '2024-09-17', 1, 1),
-(2, 'Alikal', 10.00, '2024-09-18', 2, 2);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `productos`
---
-
-CREATE TABLE `productos` (
-  `producto_id` int(11) NOT NULL,
-  `nombre_producto` varchar(100) NOT NULL,
-  `nombre_droga` varchar(100) NOT NULL,
-  `precio` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- Volcado de datos para la tabla `productos`
---
-
-INSERT INTO `productos` (`producto_id`, `nombre_producto`, `nombre_droga`, `precio`) VALUES
-(1, 'Tafirol', 'Paracetamol', 4500),
-(2, 'Alikal', 'Antiácido', 2500);
+INSERT INTO `compras` (`compra_id`, `monto`, `fecha_compra`, `nombre_producto`, `nombre_droga`, `precio`, `cliente_foranea_id`) VALUES
+(1, 2.00, '2024-09-17', 'Tafirol', 'Paracetamol', 3000, 1),
+(2, 5.00, '2024-09-16', 'Alikal', 'Antiácido', 3500, 2);
 
 --
 -- Índices para tablas volcadas
@@ -102,14 +82,7 @@ ALTER TABLE `clientes`
 --
 ALTER TABLE `compras`
   ADD PRIMARY KEY (`compra_id`),
-  ADD KEY `cliente_id` (`cliente_id`),
-  ADD KEY `producto_id` (`producto_id`);
-
---
--- Indices de la tabla `productos`
---
-ALTER TABLE `productos`
-  ADD PRIMARY KEY (`producto_id`);
+  ADD KEY `cliente_foranea_id` (`cliente_foranea_id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -128,12 +101,6 @@ ALTER TABLE `compras`
   MODIFY `compra_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `productos`
---
-ALTER TABLE `productos`
-  MODIFY `producto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- Restricciones para tablas volcadas
 --
 
@@ -141,8 +108,7 @@ ALTER TABLE `productos`
 -- Filtros para la tabla `compras`
 --
 ALTER TABLE `compras`
-  ADD CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`cliente_id`),
-  ADD CONSTRAINT `compras_ibfk_2` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`producto_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`cliente_foranea_id`) REFERENCES `clientes` (`cliente_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
