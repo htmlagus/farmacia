@@ -1,12 +1,15 @@
 <?php
 
+// - Items
+
 class FarmaciaView {
+    private $user = null;
 
    public function mostrarInicio($compras) {
         
         $count = count($compras);
 
-       require 'templates/farmacia_listado.phtml';
+       require './templates/farmacia_listado.phtml';
 
     }
 
@@ -16,4 +19,13 @@ class FarmaciaView {
 
     }
 
+    public function mostrarError($error) {
+
+        require 'templates/error.phtml';
+    }
+
+    public function verFormAgregar($clientes) {
+
+        require 'templates/form_agregar.phtml';
+    }
 }
