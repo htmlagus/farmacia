@@ -1,0 +1,31 @@
+<?php require 'templates/layout/header.phtml' ?>
+                  
+         <ul class="list-group"> 
+           <?php foreach($compras as $compra) { ?>
+               <li class="list-group-item"><?php echo $compra->monto ?> - <?php echo $compra->fecha_compra ?> - <?php echo $compra->nombre_producto?> -
+               <?php echo $compra->nombre_droga ?> - <?php echo $compra->precio ?> - <?php echo $compra->compra_id ?>
+               <a href="visualizar/<?php echo $compra->compra_id; ?>" type="button" class="btn btn-info">Visualizar</a>
+               </li>
+               <?php if (isset($_SESSION['USERNAME'])) { ?>
+                <!-- Botón de Eliminar con compra_id en la URL -->
+                <a href="eliminar/<?php echo $compra->compra_id; ?>" type="button" class="btn btn-warning">Eliminar</a>
+                
+                <!-- Botón de Editar con compra_id en la URL -->
+                <a href="editar/<?php echo $compra->compra_id; ?>" type="button" class="btn btn-warning">Editar</a>
+            <?php } ?>
+         <?php } ?>
+         </ul>
+         
+         <?php if (isset($_SESSION['USERNAME'])) { ?>
+            <p class="mt-3"><small>Mostrando <?=$count?> medicamentos</small></p>
+            <a href="verFormAgregar/" type="button" class="btn btn-info">Agregar medicamento</a>
+        <?php } ?>
+         
+
+ <?php require 'templates/layout/footer.phtml' ?>
+
+         <?php
+
+         
+  
+       // compras hace referencia a los detalles del medicamento

@@ -1,0 +1,23 @@
+<?php if ($compra): ?>
+    <h1>Detalles de la Compra</h1>
+    <ul class="list-group">
+        <li class="list-group-item">
+            Monto: <?php echo $compra->monto; ?>
+        </li>
+        <li class="list-group-item">
+            Fecha de Compra: <?php echo $compra->fecha_compra; ?>
+        </li>
+        <li class="list-group-item">
+            Nombre del producto: <?php echo $compra->nombre_producto; ?>
+        </li>
+        <li class="list-group-item">
+            Nombre de la droga: <?php echo $compra->nombre_droga; ?>
+        </li>
+        <li class="list-group-item">
+            Precio: <?php echo $compra->precio; ?>
+        </li>
+
+    </ul>
+<?php else: ?>
+    <p>No se encontraron detalles de la compra.</p>
+<?php endif; ?>
