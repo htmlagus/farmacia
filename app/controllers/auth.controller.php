@@ -40,9 +40,6 @@ class AuthController
         // Verificar que el usuario está en la base de datos
         $userFromDB = $this->model->obtenerUsuario($usuario);
 
-        // password: 123456
-        // $userFromDB->password: $2y$10$xQop0wF1YJ/dKhZcWDqHceUM96S04u73zGeJtU80a1GmM.H5H0EHC
-
         if ($userFromDB && password_verify($contraseña, $userFromDB->contraseña)) {
             // Guardo en la sesión el ID del usuario
             session_start();
@@ -63,7 +60,7 @@ class AuthController
         session_start(); // Va a buscar la cookie
         session_unset();
         session_destroy(); // Borra la cookie que se buscó
-        header('Location:login');
+        header('Location: ' . BASE_URL);
         exit();
     }
 }

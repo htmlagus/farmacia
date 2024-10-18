@@ -1,3 +1,5 @@
+<?php require 'templates/layout/header.phtml' ?>
+
 <?php if ($compra): ?>
     <h1>Detalles de la Compra</h1>
     <ul class="list-group">
@@ -29,3 +31,5 @@
 <?php else: ?>
     <p>No se encontraron detalles de la compra.</p>
 <?php endif; ?>
+
+<?php require 'templates/layout/footer.phtml' ?>

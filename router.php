@@ -72,6 +72,7 @@ switch ($params[0]) {
         break;
 
     case 'verFormActualizar':
+        sessionAuthMiddleware($res);
         if (isset($params[1])) {
             $id = $params[1];
             $controller = new FarmaciaController($res);
@@ -80,6 +81,7 @@ switch ($params[0]) {
         }
 
     case 'verFormAgregar':
+        sessionAuthMiddleware($res);
         $controller = new FarmaciaController();
         $controller->verFormAgregar();
         break;

@@ -14,16 +14,14 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-custom">
             <div class="container-fluid">
-                <a class="navbar-brand" href="inicio">Farmacia - Inicio</a>
+                <a class="navbar-brand" href="<?= BASE_URL ?>inicio">Farmacia - Inicio</a>
                 <div class="d-flex align-items-center">
                     <?php if (isset($_SESSION['USERNAME'])): ?>
                         <span class="navbar-text me-3"><?= htmlspecialchars($_SESSION['USERNAME']); ?></span>
-                        <!-- Botón de Cerrar sesión -->
                         <form method="post" action="authController.php?action=logout" class="d-inline">
                             <button type="submit" class="btn btn-outline-dark">Cerrar sesión</button>
                         </form>
                     <?php else: ?>
-                        <!-- Botón de Login -->
                         <a href="login" class="btn btn-outline-dark">Login</a>
                     <?php endif; ?>
                 </div>

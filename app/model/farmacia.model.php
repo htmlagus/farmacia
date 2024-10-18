@@ -10,13 +10,10 @@ class FarmaciaModel
 
     private function deploy()
     {
-        // Verificamos si ya existen tablas en la base de datos
         $query = $this->db->query("SHOW TABLES LIKE 'clientes'");
         $tables = $query->fetchAll();
 
-        // Si no existen tablas, las creamos y llenamos con datos iniciales
         if (count($tables) == 0) {
-            // Concatenamos la creación de las tablas y la inserción de datos en un solo bloque SQL
             $sql = <<<END
             CREATE TABLE `clientes` (
                 `cliente_id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -31,18 +28,6 @@ class FarmaciaModel
             (1, 'José', 34569231, 'Gutierrez', 'OSDE'),
             (2, 'María', 45678231, 'Lopez', 'IOMA');
     
-            CREATE TABLE `medicamentos` (
-                `medicamento_id` INT(11) NOT NULL AUTO_INCREMENT,
-                `nombre_producto` VARCHAR(255) NOT NULL,
-                `nombre_droga` VARCHAR(255) NOT NULL,
-                `precio` DECIMAL(10, 2) NOT NULL,
-                PRIMARY KEY (`medicamento_id`)
-            );
-    
-            INSERT INTO `medicamentos` (`medicamento_id`, `nombre_producto`, `nombre_droga`, `precio`) VALUES
-            (1, 'Acemuk', 'N-acetilcisteína', 500.00),
-            (2, 'Ibuprofeno', 'Ibuprofeno', 200.00);
-    
             CREATE TABLE `compras` (
                 `compra_id` INT(11) NOT NULL AUTO_INCREMENT,
                 `monto` DECIMAL(10, 2) NOT NULL,
@@ -55,12 +40,10 @@ class FarmaciaModel
                 FOREIGN KEY (`cliente_foranea_id`) REFERENCES `clientes`(`cliente_id`)
             );
     
-            -- Insertar datos en 'compras'
             INSERT INTO `compras` (`compra_id`, `monto`, `fecha_compra`, `nombre_producto`, `nombre_droga`, `precio`, `cliente_foranea_id`) VALUES
             (1, 2.00, '2024-09-17', 'Tafirol', 'Paracetamol', 3000, 1),
             (2, 5.00, '2024-09-16', 'Alikal', 'Antiácido', 3500, 2);
     
-            -- Crear tabla 'usuarios'
             CREATE TABLE `usuarios` (
                 `id` INT(11) NOT NULL AUTO_INCREMENT,
                 `usuario` VARCHAR(250) NOT NULL,
@@ -68,7 +51,6 @@ class FarmaciaModel
                 PRIMARY KEY (`id`)
             );
     
-            -- Insertar datos en 'usuarios'
             INSERT INTO `usuarios` (`id`, `usuario`, `contraseña`) VALUES
             (1, 'webadmin', '$2y$10$4D4EvRG7Su3mNi7kc5/imeC6Avq8G6Bbeohvy4E0cjA5ZW7KyatL2'),
             (3, 'farmaceutico', '\$2y\$10\$FkLDMaMgLN1nnaC0N4g83O3DYsL2n6cNnzA/hcMgGNIHc74zjmR2e');

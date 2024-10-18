@@ -1,5 +1,7 @@
+<?php require 'templates/layout/header.phtml' ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -8,34 +10,47 @@
 </head>
 
 <body>
-    <form method="POST" action="<?= BASE_URL ?>actualizarMedicamento">
+<form method="POST" action="<?= BASE_URL ?>actualizarMedicamento" class="p-4 border rounded shadow">
+    <input type="hidden" name="compra_id" value="<?= $compra->compra_id ?>">
 
-        <input type="hidden" name="compra_id" value="<?= $compra->compra_id ?>">
+    <div class="mb-3">
+        <label for="monto" class="form-label">Monto</label>
+        <input type="text" id="monto" name="monto" value="<?= $compra->monto ?>" class="form-control" required>
+    </div>
 
-        <label for="monto">Monto</label>
-        <input type="text" id="monto" name="monto" value="<?= $compra->monto ?>" required>
+    <div class="mb-3">
+        <label for="fecha_compra" class="form-label">Fecha</label>
+        <input type="text" id="fecha_compra" name="fecha_compra" value="<?= $compra->fecha_compra ?>" class="form-control" required>
+    </div>
 
-        <label for="fecha_compra">Fecha</label>
-        <input type="text" id="fecha_compra" name="fecha_compra" value="<?= $compra->fecha_compra ?>" required>
+    <div class="mb-3">
+        <label for="nombre_producto" class="form-label">Nombre del producto</label>
+        <input type="text" id="nombre_producto" name="nombre_producto" value="<?= $compra->nombre_producto ?>" class="form-control" required>
+    </div>
 
-        <label for="nombre_producto">Nombre del producto</label>
-        <input type="text" id="nombre_producto" name="nombre_producto" value="<?= $compra->nombre_producto ?>" required>
+    <div class="mb-3">
+        <label for="nombre_droga" class="form-label">Nombre de la droga</label>
+        <input type="text" id="nombre_droga" name="nombre_droga" value="<?= $compra->nombre_droga ?>" class="form-control" required>
+    </div>
 
-        <label for="nombre_droga">Nombre de la droga</label>
-        <input type="text" id="nombre_droga" name="nombre_droga" value="<?= $compra->nombre_droga ?>" required>
+    <div class="mb-3">
+        <label for="precio" class="form-label">Precio</label>
+        <input type="number" id="precio" name="precio" value="<?= $compra->precio ?>" class="form-control" required>
+    </div>
 
-        <label for="precio">Precio</label>
-        <input type="number" id="precio" name="precio" value="<?= $compra->precio ?>" required>
-
-
-        <label for="cliente_id">Seleccione un cliente</label>
-        <select id="cliente_id" name="cliente_id">
+    <div class="mb-3">
+        <label for="cliente_id" class="form-label">Seleccione un cliente</label>
+        <select id="cliente_id" name="cliente_id" class="form-select">
             <?php foreach ($clientes as $cliente): ?>
                 <option value="<?php echo $cliente->cliente_id; ?>"><?= $cliente->nombre; ?></option>
             <?php endforeach; ?>
         </select>
-        <button type="submit">Editar medicamento</button>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Editar medicamento</button>
     </form>
 </body>
 
 </html>
+
+<?php require 'templates/layout/footer.phtml' ?>
