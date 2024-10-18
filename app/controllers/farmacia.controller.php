@@ -2,8 +2,8 @@
 
 // - Items
 
-include_once 'app/model/farmacia.model.php';
-include_once 'app/view/farmacia.view.php';
+include_once 'app/models/farmacia.model.php';
+include_once 'app/views/farmacia.view.php';
 
 class FarmaciaController
 {

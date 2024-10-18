@@ -8,8 +8,8 @@ require_once 'app/middlewares/verify.auth.middleware.php';
 require_once 'app/controllers/farmacia.controller.php';
 require_once 'app/controllers/auth.controller.php';
 
-require_once 'app/model/farmacia.model.php';
-require_once 'app/view/farmacia.view.php';
+require_once 'app/models/farmacia.model.php';
+require_once 'app/views/farmacia.view.php';
 
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 

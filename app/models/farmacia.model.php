@@ -2,7 +2,7 @@
 
 // - Items 
 
-require_once 'app/model/config.php';
+require_once 'app/models/config.php';
 
 class FarmaciaModel
 {
