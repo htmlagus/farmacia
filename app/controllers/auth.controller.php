@@ -60,7 +60,7 @@ class AuthController
         session_start(); // Va a buscar la cookie
         session_unset();
         session_destroy(); // Borra la cookie que se buscó
-        header('Location: ' . BASE_URL);
+        header('Location: ' . BASE_URL . 'login');
         exit();
     }
 }
