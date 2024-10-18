@@ -2,21 +2,29 @@
     <h1>Detalles de la Compra</h1>
     <ul class="list-group">
         <li class="list-group-item">
-            Monto: <?php echo $compra->monto; ?>
+            Monto: <?php echo htmlspecialchars($compra->monto); ?>
         </li>
         <li class="list-group-item">
-            Fecha de Compra: <?php echo $compra->fecha_compra; ?>
+            Fecha de Compra: <?php echo htmlspecialchars($compra->fecha_compra); ?>
         </li>
         <li class="list-group-item">
-            Nombre del producto: <?php echo $compra->nombre_producto; ?>
+            Nombre del producto: <?php echo htmlspecialchars($compra->nombre_producto); ?>
         </li>
         <li class="list-group-item">
-            Nombre de la droga: <?php echo $compra->nombre_droga; ?>
+            Nombre de la droga: <?php echo htmlspecialchars($compra->nombre_droga); ?>
         </li>
         <li class="list-group-item">
-            Precio: <?php echo $compra->precio; ?>
+            Precio: <?php echo htmlspecialchars($compra->precio); ?>
         </li>
-
+        <?php if ($cliente): ?>
+            <li class="list-group-item">
+                Nombre del cliente: <?php echo htmlspecialchars($cliente->nombre); ?>
+            </li>
+        <?php else: ?>
+            <li class="list-group-item">
+                Cliente no encontrado.
+            </li>
+        <?php endif; ?>
     </ul>
 <?php else: ?>
     <p>No se encontraron detalles de la compra.</p>

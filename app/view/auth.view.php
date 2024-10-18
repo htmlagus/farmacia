@@ -1,10 +1,11 @@
 <?php
 
-class AuthView {
+class AuthView
+{
     private $user = null;
 
-    public function mostrarLogin($error = '') {
+    public function mostrarLogin($error = '')
+    {
         require 'templates/form_login.phtml';
     }
-
 }
