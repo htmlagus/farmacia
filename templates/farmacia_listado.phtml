@@ -2,7 +2,7 @@
 
 <ul class="list-group">
   <?php foreach ($compras as $compra) { ?>
-    <li class="list-group-item"><?php echo $compra->monto ?> - <?php echo $compra->fecha_compra ?> - <?php echo $compra->nombre_producto ?> -
+    <li class="list-group-item"><?php echo $compra->cantidad ?> - <?php echo $compra->fecha_compra ?> - <?php echo $compra->nombre_producto ?> -
       <?php echo $compra->nombre_droga ?> - <?php echo $compra->precio ?> - <?php echo $compra->compra_id ?>
       <a href="visualizar/<?php echo $compra->compra_id; ?>" type="button" class="btn btn-info">Visualizar</a>
       <?php if (isset($_SESSION['USERNAME'])) { ?>

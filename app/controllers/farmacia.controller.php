@@ -42,8 +42,8 @@ class FarmaciaController
     public function agregarMedicamento()
     {
 
-        if (!isset($_POST['monto']) || empty($_POST['monto'])) {
-            return $this->view->mostrarError('Agrege un monto.');
+        if (!isset($_POST['cantidad']) || empty($_POST['cantidad'])) {
+            return $this->view->mostrarError('Agrege un cantidad.');
         }
 
         if (!isset($_POST['fecha_compra']) || empty($_POST['fecha_compra'])) {
@@ -63,13 +63,13 @@ class FarmaciaController
         }
 
         $cliente_id = $_POST['cliente_id'];
-        $monto = $_POST['monto'];
+        $cantidad = $_POST['cantidad'];
         $fecha_compra = $_POST['fecha_compra'];
         $nombre_producto = $_POST['nombre_producto'];
         $nombre_droga = $_POST['nombre_droga'];
         $precio = $_POST['precio'];
 
-        $compra_id = $this->model->añadirMedicamento($monto, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_id,);
+        $compra_id = $this->model->añadirMedicamento($cantidad, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_id,);
 
         header('Location: ' . BASE_URL);
     }
@@ -92,7 +92,7 @@ class FarmaciaController
     public function actualizarMedicamento()
     {
 
-        if (!isset($_POST['monto']) || empty($_POST['monto'])) {
+        if (!isset($_POST['cantidad']) || empty($_POST['cantidad'])) {
             return $this->view->mostrarError('Falta completar el nombre de la planta');
         }
 
@@ -117,7 +117,7 @@ class FarmaciaController
         }
 
         $id = $_POST['compra_id'];
-        $monto = $_POST['monto'];
+        $cantidad = $_POST['cantidad'];
         $fecha_compra = $_POST['fecha_compra'];
         $nombre_producto = $_POST['nombre_producto'];
         $nombre_droga = $_POST['nombre_droga'];
@@ -125,7 +125,7 @@ class FarmaciaController
         $cliente_id = $_POST['cliente_id'];
 
 
-        $id = $this->model->actualizarMedicamento($id, $monto, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_id);
+        $id = $this->model->actualizarMedicamento($id, $cantidad, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_id);
 
         header('Location: ' . BASE_URL);
     }

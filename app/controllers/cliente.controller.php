@@ -1,7 +1,7 @@
 <?php
 
-include_once 'app/view/cliente.view.php';
-include_once 'app/model/cliente.model.php';
+include_once 'app/views/cliente.view.php';
+include_once 'app/models/cliente.model.php';
 
 class ClienteController
 {

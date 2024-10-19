@@ -51,7 +51,7 @@ INSERT INTO `clientes` (`cliente_id`, `nombre`, `dni`, `apellido`, `obra_social`
 
 CREATE TABLE `compras` (
   `compra_id` int(11) NOT NULL,
-  `monto` decimal(10,2) NOT NULL,
+  `cantidad` decimal(10,2) NOT NULL,
   `fecha_compra` date NOT NULL,
   `nombre_producto` varchar(100) NOT NULL,
   `nombre_droga` varchar(100) NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE `compras` (
 -- Volcado de datos para la tabla `compras`
 --
 
-INSERT INTO `compras` (`compra_id`, `monto`, `fecha_compra`, `nombre_producto`, `nombre_droga`, `precio`, `cliente_foranea_id`) VALUES
+INSERT INTO `compras` (`compra_id`, `cantidad`, `fecha_compra`, `nombre_producto`, `nombre_droga`, `precio`, `cliente_foranea_id`) VALUES
 (1, 2.00, '2024-09-17', 'Tafirol', 'Paracetamol', 3000, 1),
 (2, 5.00, '2024-09-16', 'Alikal', 'Antiácido', 3500, 2);
 
