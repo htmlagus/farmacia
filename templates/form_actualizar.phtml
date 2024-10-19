@@ -10,44 +10,46 @@
 </head>
 
 <body>
-<form method="POST" action="<?= BASE_URL ?>actualizarMedicamento" class="p-4 border rounded shadow">
-    <input type="hidden" name="compra_id" value="<?= $compra->compra_id ?>">
+    <form method="POST" action="<?= BASE_URL ?>actualizarMedicamento" class="p-4 border rounded shadow">
 
-    <div class="mb-3">
-        <label for="cantidad" class="form-label">Candidad</label>
-        <input type="text" id="cantidad" name="cantidad" value="<?= $compra->cantidad ?>" class="form-control" required>
-    </div>
+        <input type="hidden" name="compra_id" value="<?= $compra->compra_id ?>">
 
-    <div class="mb-3">
-        <label for="fecha_compra" class="form-label">Fecha</label>
-        <input type="text" id="fecha_compra" name="fecha_compra" value="<?= $compra->fecha_compra ?>" class="form-control" required>
-    </div>
+        <div class="mb-3">
+            <label for="cantidad" class="form-label">Candidad</label>
+            <input type="text" id="cantidad" name="cantidad" value="<?= $compra->cantidad ?>" class="form-control" required>
+        </div>
 
-    <div class="mb-3">
-        <label for="nombre_producto" class="form-label">Nombre del producto</label>
-        <input type="text" id="nombre_producto" name="nombre_producto" value="<?= $compra->nombre_producto ?>" class="form-control" required>
-    </div>
+        <div class="mb-3">
+            <label for="fecha_compra" class="form-label">Fecha</label>
+            <input type="text" id="fecha_compra" name="fecha_compra" value="<?= $compra->fecha_compra ?>" class="form-control" required>
+        </div>
 
-    <div class="mb-3">
-        <label for="nombre_droga" class="form-label">Nombre de la droga</label>
-        <input type="text" id="nombre_droga" name="nombre_droga" value="<?= $compra->nombre_droga ?>" class="form-control" required>
-    </div>
+        <div class="mb-3">
+            <label for="nombre_producto" class="form-label">Nombre del producto</label>
+            <input type="text" id="nombre_producto" name="nombre_producto" value="<?= $compra->nombre_producto ?>" class="form-control" required>
+        </div>
 
-    <div class="mb-3">
-        <label for="precio" class="form-label">Precio</label>
-        <input type="number" id="precio" name="precio" value="<?= $compra->precio ?>" class="form-control" required>
-    </div>
+        <div class="mb-3">
+            <label for="nombre_droga" class="form-label">Nombre de la droga</label>
+            <input type="text" id="nombre_droga" name="nombre_droga" value="<?= $compra->nombre_droga ?>" class="form-control" required>
+        </div>
 
-    <div class="mb-3">
-        <label for="cliente_id" class="form-label">Seleccione un cliente</label>
-        <select id="cliente_id" name="cliente_id" class="form-select">
-            <?php foreach ($clientes as $cliente): ?>
-                <option value="<?php echo $cliente->cliente_id; ?>"><?= $cliente->nombre; ?></option>
-            <?php endforeach; ?>
-        </select>
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Editar medicamento</button>
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input type="number" id="precio" name="precio" value="<?= $compra->precio ?>" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="cliente_id" class="form-label">Seleccione un cliente</label>
+            <select id="cliente_id" name="cliente_id" class="form-select">
+                <?php foreach ($clientes as $cliente): ?>
+                    <option value="<?php echo $cliente->cliente_id; ?>"><?= $cliente->nombre; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Confirmar</button>
+        <a href="<?= BASE_URL ?>" class="btn btn-danger ">Cancelar</a>
     </form>
 </body>
 
