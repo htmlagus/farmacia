@@ -57,6 +57,9 @@ switch ($params[0]) {
         $controller->agregarMedicamento();
         break;
 
+
+
+
     case 'eliminar':
         sessionAuthMiddleware($res);
         verifyAuthMiddleware($res); // Verifica que el usuario esté logueado o redirige a login
@@ -85,6 +88,27 @@ switch ($params[0]) {
         $controller = new FarmaciaController();
         $controller->verFormAgregar();
         break;
+
+    case 'clientes':
+        sessionAuthMiddleware($res);
+        $clienteController = new ClienteController();
+        $clienteController->listarClientes();
+        break;
+
+
+    case 'cliente': // Asegúrate de que la acción coincide con la ruta
+
+        if (isset($params[1])) {
+            sessionAuthMiddleware($res);
+            $idCliente = (int)$params[1];
+            $clienteController = new ClienteController();
+            $clienteController->verCliente($idCliente); // Obtén el cliente por ID
+        } else {
+            // Manejo de error: si no hay ID, puedes redirigir o mostrar un error
+            echo "ID de cliente no proporcionado.";
+        }
+        break;
+
 
     case 'mostrarLogin':
         $controller = new AuthController();
