@@ -7,9 +7,13 @@ require_once 'app/middlewares/verify.auth.middleware.php';
 
 require_once 'app/controllers/farmacia.controller.php';
 require_once 'app/controllers/auth.controller.php';
+require_once 'app/controllers/cliente.controller.php';
 
 require_once 'app/models/farmacia.model.php';
+require_once 'app/models/cliente.model.php';
+
 require_once 'app/views/farmacia.view.php';
+require_once 'app/views/cliente.view.php';
 
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
