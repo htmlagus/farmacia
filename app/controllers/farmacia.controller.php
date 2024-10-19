@@ -41,37 +41,20 @@ class FarmaciaController
 
     public function agregarMedicamento()
     {
+        if (!isset($_POST['monto']) && !isset($_POST['fecha_compra']) && !isset($_POST['nombre_producto']) && !isset($_POST['nombre_droga']) && !isset($_POST['precio'])) {
+            return $this->view->mostrarError("Falto completar campos");
+        } else {
+            $cliente_id = htmlspecialchars($_POST['cliente_id']);
+            $monto = htmlspecialchars($_POST['monto']);
+            $fecha_compra = htmlspecialchars($_POST['fecha_compra']);
+            $nombre_producto = htmlspecialchars($_POST['nombre_producto']);
+            $nombre_droga = htmlspecialchars($_POST['nombre_droga']);
+            $precio = htmlspecialchars($_POST['precio']);
 
-        if (!isset($_POST['cantidad']) || empty($_POST['cantidad'])) {
-            return $this->view->mostrarError('Agrege un cantidad.');
+            $compra_id = $this->model->añadirMedicamento($monto, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_id,);
+
+            header('Location: ' . BASE_URL);
         }
-
-        if (!isset($_POST['fecha_compra']) || empty($_POST['fecha_compra'])) {
-            return $this->view->mostrarError('Agrege una fecha.');
-        }
-
-        if (!isset($_POST['nombre_producto']) || empty($_POST['nombre_producto'])) {
-            return $this->view->mostrarError('Agrege un producto.');
-        }
-
-        if (!isset($_POST['nombre_droga']) || empty($_POST['nombre_droga'])) {
-            return $this->view->mostrarError('Agrege el nombre de la droga.');
-        }
-
-        if (!isset($_POST['precio']) || empty($_POST['precio'])) {
-            return $this->view->mostrarError('Agrege un precio.');
-        }
-
-        $cliente_id = $_POST['cliente_id'];
-        $cantidad = $_POST['cantidad'];
-        $fecha_compra = $_POST['fecha_compra'];
-        $nombre_producto = $_POST['nombre_producto'];
-        $nombre_droga = $_POST['nombre_droga'];
-        $precio = $_POST['precio'];
-
-        $compra_id = $this->model->añadirMedicamento($cantidad, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_id,);
-
-        header('Location: ' . BASE_URL);
     }
 
     public function eliminarMedicamento($id)
