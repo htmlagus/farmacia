@@ -30,7 +30,7 @@ class FarmaciaModel
     
             CREATE TABLE `compras` (
                 `compra_id` INT(11) NOT NULL AUTO_INCREMENT,
-                `monto` DECIMAL(10, 2) NOT NULL,
+                `cantidad` DECIMAL(10, 2) NOT NULL,
                 `fecha_compra` DATE NOT NULL,
                 `nombre_producto` VARCHAR(100) NOT NULL,
                 `nombre_droga` VARCHAR(100) NOT NULL,
@@ -40,7 +40,7 @@ class FarmaciaModel
                 FOREIGN KEY (`cliente_foranea_id`) REFERENCES `clientes`(`cliente_id`)
             );
     
-            INSERT INTO `compras` (`compra_id`, `monto`, `fecha_compra`, `nombre_producto`, `nombre_droga`, `precio`, `cliente_foranea_id`) VALUES
+            INSERT INTO `compras` (`compra_id`, `cantidad`, `fecha_compra`, `nombre_producto`, `nombre_droga`, `precio`, `cliente_foranea_id`) VALUES
             (1, 2.00, '2024-09-17', 'Tafirol', 'Paracetamol', 3000, 1),
             (2, 5.00, '2024-09-16', 'Alikal', 'Antiácido', 3500, 2);
     
@@ -95,11 +95,11 @@ class FarmaciaModel
         return $compra;
     }
 
-    public function añadirMedicamento($monto, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_foranea_id)
+    public function añadirMedicamento($cantidad, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_foranea_id)
     {
 
-        $query = $this->db->prepare('INSERT INTO compras (monto, fecha_compra, nombre_producto, nombre_droga, precio, cliente_foranea_id) VALUES (?, ?, ?, ?, ?, ?)');
-        $query->execute([$monto, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_foranea_id]);
+        $query = $this->db->prepare('INSERT INTO compras (cantidad, fecha_compra, nombre_producto, nombre_droga, precio, cliente_foranea_id) VALUES (?, ?, ?, ?, ?, ?)');
+        $query->execute([$cantidad, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_foranea_id]);
 
         $id = $this->db->lastInsertId();
 
@@ -112,10 +112,10 @@ class FarmaciaModel
         $query->execute([$id]);
     }
 
-    public function actualizarMedicamento($id, $monto, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_foranea_id)
+    public function actualizarMedicamento($id, $cantidad, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_foranea_id)
     {
-        $query = $this->db->prepare('UPDATE compras SET monto = ?, fecha_compra = ?, nombre_producto = ?, nombre_droga = ?, precio = ?, cliente_foranea_id = ?WHERE compra_id = ?');
-        $query->execute([$monto, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_foranea_id, $id]);
+        $query = $this->db->prepare('UPDATE compras SET cantidad = ?, fecha_compra = ?, nombre_producto = ?, nombre_droga = ?, precio = ?, cliente_foranea_id = ?WHERE compra_id = ?');
+        $query->execute([$cantidad, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_foranea_id, $id]);
     }
 
     public function obtenerClientes()

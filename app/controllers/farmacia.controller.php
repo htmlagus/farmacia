@@ -41,37 +41,36 @@ class FarmaciaController
 
     public function agregarMedicamento()
     {
+        $campos = [
+            'cantidad' => 'Falta completar el cantidad de la compra',
+            'fecha_compra' => 'Falta completar la fecha de compra',
+            'nombre_producto' => 'Falta completar el nombre del producto',
+            'nombre_droga' => 'Falta completar el nombre de la droga',
+            'precio' => 'Falta completar el precio',
+            'cliente_id' => 'Falta seleccionar el cliente'
+        ];
 
-        if (!isset($_POST['monto']) || empty($_POST['monto'])) {
-            return $this->view->mostrarError('Agrege un monto.');
+        // Validar los campos
+        foreach ($campos as $campo => $mensajeError) {
+            if (!isset($_POST[$campo]) || empty($_POST[$campo])) {
+                return $this->view->mostrarError($mensajeError);
+            }
         }
 
-        if (!isset($_POST['fecha_compra']) || empty($_POST['fecha_compra'])) {
-            return $this->view->mostrarError('Agrege una fecha.');
-        }
+        // Si las validaciones pasan, escapa los datos
+        $cliente_id = htmlspecialchars($_POST['cliente_id']);
+        $cantidad = htmlspecialchars($_POST['cantidad']);
+        $fecha_compra = htmlspecialchars($_POST['fecha_compra']);
+        $nombre_producto = htmlspecialchars($_POST['nombre_producto']);
+        $nombre_droga = htmlspecialchars($_POST['nombre_droga']);
+        $precio = htmlspecialchars($_POST['precio']);
 
-        if (!isset($_POST['nombre_producto']) || empty($_POST['nombre_producto'])) {
-            return $this->view->mostrarError('Agrege un producto.');
-        }
+        // Llamar al modelo para agregar el medicamento
+        $compra_id = $this->model->añadirMedicamento($cantidad, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_id);
 
-        if (!isset($_POST['nombre_droga']) || empty($_POST['nombre_droga'])) {
-            return $this->view->mostrarError('Agrege el nombre de la droga.');
-        }
-
-        if (!isset($_POST['precio']) || empty($_POST['precio'])) {
-            return $this->view->mostrarError('Agrege un precio.');
-        }
-
-        $cliente_id = $_POST['cliente_id'];
-        $monto = $_POST['monto'];
-        $fecha_compra = $_POST['fecha_compra'];
-        $nombre_producto = $_POST['nombre_producto'];
-        $nombre_droga = $_POST['nombre_droga'];
-        $precio = $_POST['precio'];
-
-        $compra_id = $this->model->añadirMedicamento($monto, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_id,);
-
+        // Redirigir al usuario después de agregar el medicamento
         header('Location: ' . BASE_URL);
+        exit;
     }
 
     public function eliminarMedicamento($id)
@@ -92,42 +91,39 @@ class FarmaciaController
     public function actualizarMedicamento()
     {
 
-        if (!isset($_POST['monto']) || empty($_POST['monto'])) {
-            return $this->view->mostrarError('Falta completar el nombre de la planta');
+        $campos = [
+            'cantidad' => 'Falta completar la cantidad del medicamento',
+            'fecha_compra' => 'Falta completar la fecha de la compra',
+            'nombre_producto' => 'Falta completar el nombre del producto',
+            'nombre_droga' => 'Falta completar el nombre de la droga',
+            'precio' => 'Falta completar el precio del medicamento',
+            'cliente_id' => 'Falta seleccionar el cliente'
+        ];
+
+        // Validar todos los campos en un solo bucle
+
+        foreach ($campos as $campo => $mensajeError) {
+            if (!isset($_POST[$campo]) || empty($_POST[$campo])) {
+                return $this->view->mostrarError($mensajeError);
+            }
         }
 
-        if (!isset($_POST['fecha_compra']) || empty($_POST['fecha_compra'])) {
-            return $this->view->mostrarError('Falta completar el precio de la planta');
-        }
-
-        if (!isset($_POST['nombre_producto']) || empty($_POST['nombre_producto'])) {
-            return $this->view->mostrarError('Falta completar el numero de pedido');
-        }
-
-        if (!isset($_POST['nombre_droga']) || empty($_POST['nombre_droga'])) {
-            return $this->view->mostrarError('Falta completar el stock de la planta');
-        }
-
-        if (!isset($_POST['nombre_droga']) || empty($_POST['nombre_droga'])) {
-            return $this->view->mostrarError('Falta completar el stock de la planta');
-        }
-
-        if (!isset($_POST['precio']) || empty($_POST['precio'])) {
-            return $this->view->mostrarError('Falta completar el stock de la planta');
-        }
+        // Si todos los campos son válidos, tomamos los datos
 
         $id = $_POST['compra_id'];
-        $monto = $_POST['monto'];
+        $cantidad = $_POST['cantidad'];
         $fecha_compra = $_POST['fecha_compra'];
         $nombre_producto = $_POST['nombre_producto'];
         $nombre_droga = $_POST['nombre_droga'];
         $precio = $_POST['precio'];
         $cliente_id = $_POST['cliente_id'];
 
+        // Llamar al modelo para actualizar los datos
+        $this->model->actualizarMedicamento($id, $cantidad, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_id);
 
-        $id = $this->model->actualizarMedicamento($id, $monto, $fecha_compra, $nombre_producto, $nombre_droga, $precio, $cliente_id);
-
+        // Redirigir al usuario
         header('Location: ' . BASE_URL);
+        exit;
     }
 
     public function verFormActualizar($id)
@@ -137,7 +133,7 @@ class FarmaciaController
         $compra = $this->model->obtenerMedicamento($id);
 
         if (!$compra) {
-            return $this->view->mostrarError("No existe la planta con el id=$id");
+            return $this->view->mostrarError("No existe la compra con el id=$id");
         }
 
         $this->view->verFormActualizar($compra, $clientes);

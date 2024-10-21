@@ -114,6 +114,45 @@ switch ($params[0]) {
         break;
 
 
+    case 'agregarCliente':
+        sessionAuthMiddleware($res);
+        verifyAuthMiddleware($res);
+        $controller = new ClienteController($res);
+        $controller->agregarCliente();
+        break;
+
+
+    case 'agregarClienteForm':
+        sessionAuthMiddleware($res);
+        verifyAuthMiddleware($res);
+        $controller = new ClienteController($res);
+        $controller->agregarClienteForm();
+        break;
+
+    case 'eliminarCliente':
+        sessionAuthMiddleware($res);
+        verifyAuthMiddleware($res); // Verifica que el usuario esté logueado o redirige a login
+        $controller = new ClienteController($res);
+        $controller->eliminarCliente($params[1]);
+        break;
+
+    case 'actualizarClienteForm':
+        sessionAuthMiddleware($res);
+        if (isset($params[1])) {
+            $id = $params[1];
+            verifyAuthMiddleware($res);
+            $controller = new ClienteController($res);
+            $controller->actualizarClienteForm($id);
+            break;
+        }
+
+    case 'actualizarCliente':
+        sessionAuthMiddleware($res);
+        verifyAuthMiddleware($res);
+        $controller = new ClienteController($res);
+        $controller->editarCliente();
+        break;
+
     case 'mostrarLogin':
         $controller = new AuthController();
         $controller->mostrarLogin();
