@@ -1,3 +1,4 @@
+<?php require 'templates/layout/header.phtml' ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -11,14 +12,26 @@
 <body>
     <div class="container mt-5">
         <h1>Listado de Clientes</h1>
-        <ul class="list-group">
+        <ul class="list-group mt-3">
             <?php foreach ($clientes as $cliente): ?>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span><?= htmlspecialchars($cliente->nombre) ?></span>
-                    <a href="cliente/<?= htmlspecialchars($cliente->cliente_id) ?>" class="btn btn-primary btn-sm">Más información</a>
+                    <div>
+                        <?php if (isset($_SESSION['USERNAME'])) { ?>
+                            <a href="actualizarClienteForm/<?php echo $cliente->cliente_id; ?>" type="button" class="btn btn-warning">Editar</a>
+                            <a href="eliminarCliente/<?php echo $cliente->cliente_id; ?>" type="button" class="btn btn-danger">Eliminar</a>
+                        <?php } ?>
+                        <a href="cliente/<?= htmlspecialchars($cliente->cliente_id) ?>" class="btn btn-primary">Más información</a>
+                    </div>
                 </li>
             <?php endforeach; ?>
         </ul>
+    </div>
+    <div class="container mt-5">
+        <?php if (isset($_SESSION['USERNAME'])) { ?>
+            <a href="agregarClienteForm/" type="button" class="btn btn-info ms-3">Nuevo Cliente</a>
+        <?php } ?>
+        <a href=<?= BASE_URL ?> type="button" class="btn btn-info ms-3">Volver al inicio</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
